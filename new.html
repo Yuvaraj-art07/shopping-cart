@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Shopping List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin-right: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #f9f9f9;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .remove-btn {
+            background-color: #f44336;
+            border: none;
+            padding: 5px 10px;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .remove-btn:hover {
+            background-color: #e53935;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Shopping List</h1>
+        <input type="text" id="itemInput" placeholder="Add new item..." />
+        <button onclick="addItem()">Add Item</button>
+
+        <ul id="shoppingList">
+            <!-- List items will appear here -->
+        </ul>
+    </div>
+
+    <script>
+        // Function to add items to the list
+        function addItem() {
+            const input = document.getElementById('itemInput');
+            const itemText = input.value.trim();
+
+            if (itemText === "") {
+                alert("Please enter an item.");
+                return;
+            }
+
+            const ul = document.getElementById('shoppingList');
+            const li = document.createElement('li');
+
+            // Create the item text and append to the list item
+            const textNode = document.createTextNode(itemText);
+            li.appendChild(textNode);
+
+            // Create a remove button for each item
+            const removeButton = document.createElement('button');
+            removeButton.textContent = "Remove";
+            removeButton.className = "remove-btn";
+            removeButton.onclick = function () {
+                ul.removeChild(li);
+            };
+            li.appendChild(removeButton);
+
+            // Append the new list item to the unordered list
+            ul.appendChild(li);
+
+            // Clear the input field after adding the item
+            input.value = "";
+        }
+    </script>
+
+</body>
+</html>
